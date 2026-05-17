@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
     // Enable sharp for faster local image optimization
     // (sharp is installed by Next.js automatically)
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year for production
+
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/photo-**",
+      },
+    ],
   },
 };
 
