@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ── Tailwind v4 theme — design tokens del sistema ─────── */
+@theme {
+  /* Fuentes */
+  --font-display: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  --font-sans:    var(--font-sans, "Plus Jakarta Sans", system-ui, sans-serif);
+  --font-serif:   var(--font-serif, "Libre Baskerville", Georgia, serif);
+
+  /* Paleta principal */
+  --color-paramo:        #3F7D44;
+  --color-paramo-dark:   #2D5A32;
+  --color-paramo-light:  #6BAF71;
+  --color-colonial:      #C76139;
+  --color-colonial-dark: #8B3D22;
+  --color-colonial-light:#E08860;
+  --color-andino:        #3D8BCD;
+  --color-andino-dark:   #1E5C94;
+  --color-andino-light:  #6AAEDE;
+  --color-oro:           #E8B040;
+  --color-oro-dark:      #B5861E;
+  --color-oro-light:     #F0C870;
+  --color-nevado:        #F5F7F9;
+  --color-carbon:        #0F1115;
+  --color-carbon-light:  #1A1C17;
+  --color-mist:          #B8C4A8;
+  --color-bark:          #2A2E24;
+  --color-stone:         #8C9480;
+  --color-parchment:     #E8E0CC;
+
+  /* Gradientes */
+  --background-image-gradient-paramo: linear-gradient(160deg, #0F1115 0%, #1A2418 40%, #0A1508 100%);
+  --background-image-gradient-andes:  linear-gradient(180deg, rgba(15,17,21,0) 0%, rgba(15,17,21,0.7) 60%, #0F1115 100%);
+  --background-image-gradient-mist:   linear-gradient(135deg, rgba(61,139,205,0.1) 0%, rgba(63,125,68,0.05) 100%);
+
+  /* Animaciones */
+  --animate-particle-float: particle-float 6s ease-in-out infinite;
+  --animate-mist-drift:     mist-drift 8s ease-in-out infinite;
+  --animate-shimmer:        shimmer 2s linear infinite;
+}
+
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+  50%       { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+}
+
+@keyframes mist-drift {
+  0%   { transform: translateX(-10px); opacity: 0.3; }
+  50%  { opacity: 0.6; }
+  100% { transform: translateX(10px); opacity: 0.3; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ── Estilos base globales ─────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-carbon);
+  color: var(--color-nevado);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar cinematográfico */
+::-webkit-scrollbar              { width: 6px; }
+::-webkit-scrollbar-track        { background: var(--color-carbon); }
+::-webkit-scrollbar-thumb        { background: #2A2E24; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover  { background: var(--color-stone); }
+
+/* Focus visible accesible */
+:focus-visible {
+  outline: 2px solid var(--color-oro);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip-nav accesibilidad */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-oro);
+  color: var(--color-carbon);
+  font-weight: 600;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s;
+}
+.skip-nav:focus { top: 0; }
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1A1C17 25%,
+    #2A2E24 50%,
+    #1A1C17 75%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Leaflet — override para tema oscuro */
+.leaflet-container {
+  background: #1A2418 !important;
+  font-family: var(--font-sans) !important;
+}
+.leaflet-popup-content-wrapper {
+  background: #1A1C17 !important;
+  color: var(--color-nevado) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+}
+.leaflet-popup-tip { background: #1A1C17 !important; }
+.leaflet-control-zoom a {
+  background: #1A1C17 !important;
+  color: var(--color-nevado) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: #2A2E24 !important;
+}
+.leaflet-control-attribution {
+  background: rgba(15,17,21,0.7) !important;
+  color: rgba(255,255,255,0.4) !important;
+}
