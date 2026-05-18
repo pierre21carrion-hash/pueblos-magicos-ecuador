@@ -50,7 +50,7 @@ export default function PuebloCard({ pueblo, priority = false }: PuebloCardProps
           overlay="minimal"
           objectPosition="center 40%"
           sizes={IMAGE_SIZES.card}
-          className="absolute inset-0"
+          className="w-full h-full"
         >
           {/* Overlaid badges */}
           <div className="flex flex-col justify-between h-full p-3">

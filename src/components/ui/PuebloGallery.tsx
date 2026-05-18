@@ -1,6 +1,7 @@
 // Server Component
 import Image from "next/image";
 import { getPuebloImages, IMAGE_SIZES } from "@/src/lib/images";
+import { getImageCreditsBySlug } from "@/src/data/images";
 import type { PuebloImageData } from "@/src/types/images";
 
 // ─── Sub-components ──────────────────────────────────────────
@@ -66,6 +67,7 @@ export default function PuebloGallery({ slug, nombrePueblo }: PuebloGalleryProps
 
   const { hero, gallery } = images;
   const hasGallery = gallery.length > 0;
+  const credits = getImageCreditsBySlug(slug);
 
   return (
     <section
@@ -141,7 +143,7 @@ export default function PuebloGallery({ slug, nombrePueblo }: PuebloGalleryProps
 
       {/* Attribution footer */}
       <p className="mt-3 text-white/15 text-[10px]">
-        Fotografías: {hero.credit ?? "Unsplash / Picsum License"} · {nombrePueblo}, Ecuador
+        Fotografias: {credits.length > 0 ? credits.join(" · ") : hero.credit} · {nombrePueblo}, Ecuador
       </p>
     </section>
   );

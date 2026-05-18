@@ -12,10 +12,11 @@ import type {
   PuebloComparable,
   FiltrosPueblos,
 } from "../types";
+import { getImagesBySlug } from "./images";
 
 // ─── REGISTRO COMPLETO ──────────────────────────────────────
 
-export const pueblosMagicosDB: PueblosMagicosDB = [
+const pueblosMagicosBaseDB: PueblosMagicosDB = [
 
   // ── 1. RUMIÑAHUI / SANGOLQUÍ ─────────────────────────────
   {
@@ -176,12 +177,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Todo el año. Las cascadas tienen mayor caudal en época de lluvias (oct–feb). Feria del hornado: domingos todo el año.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1604537466158-719b1972feb8?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/ruminahui-sangolqui/hero.jpg",
       heroColorDominante: "#2D4A1E",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1604537466158-719b1972feb8?w=900&auto=format&fit=crop&q=80", alt: "Volcán Cotopaxi nevado sobre el valle interandino de Rumiñahui" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&auto=format&fit=crop&q=80", alt: "Paisaje andino ecuatoriano con montañas al atardecer" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&auto=format&fit=crop&q=80", alt: "Naturaleza andina verde del Valle de los Chillos" },
+        { tipo: "foto", url: "/images/pueblos/ruminahui-sangolqui/hero.jpg", alt: "Volcan Ruminahui visto desde el paramo del Cotopaxi" },
+        { tipo: "foto", url: "/images/pueblos/ruminahui-sangolqui/1.jpg", alt: "Rio Pita entre vegetacion andina" },
+        { tipo: "foto", url: "/images/pueblos/ruminahui-sangolqui/2.jpg", alt: "Centro de Sangolqui y arquitectura cotidiana" },
       ],
     },
     colorAcento: "#3F7D44",
@@ -372,12 +373,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Junio a septiembre para ascensos al nevado (menor precipitación). Junio para Inti Raymi. Todo el año para gastronomía y flores.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/cayambe/hero.jpg",
       heroColorDominante: "#1A2E3A",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=900&auto=format&fit=crop&q=80", alt: "Volcán Cayambe nevado sobre páramo ecuatoriano" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&auto=format&fit=crop&q=80", alt: "Montaña andina con nieve perpetua al amanecer" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1515378791036-0648a814c963?w=900&auto=format&fit=crop&q=80", alt: "Mercado indígena de Cayambe con mujeres en traje tradicional" },
+        { tipo: "foto", url: "/images/pueblos/cayambe/hero.jpg", alt: "Nevado Cayambe cubierto de hielo" },
+        { tipo: "foto", url: "/images/pueblos/cayambe/1.jpg", alt: "Celebracion comunitaria del pueblo Kayambi" },
+        { tipo: "foto", url: "/images/pueblos/cayambe/2.jpg", alt: "Bizcochos tradicionales de Cayambe" },
       ],
     },
     colorAcento: "#3D8BCD",
@@ -561,12 +562,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Todo el año para artesanías. Septiembre para el Festival de Arte. Diciembre para compras navideñas artesanales.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1582671374045-e2c4a40f15a5?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/san-antonio-de-ibarra/hero.jpg",
       heroColorDominante: "#3A2010",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1582671374045-e2c4a40f15a5?w=900&auto=format&fit=crop&q=80", alt: "Artesano tallando madera en San Antonio de Ibarra" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1594392175511-30eca83d51c8?w=900&auto=format&fit=crop&q=80", alt: "Esculturas de madera artesanales en galería de San Antonio" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=900&auto=format&fit=crop&q=80", alt: "Vista del volcán Imbabura desde San Antonio de Ibarra" },
+        { tipo: "foto", url: "/images/pueblos/san-antonio-de-ibarra/hero.jpg", alt: "Plaza principal de San Antonio de Ibarra" },
+        { tipo: "foto", url: "/images/pueblos/san-antonio-de-ibarra/1.jpg", alt: "Esculturas de madera de San Antonio de Ibarra" },
+        { tipo: "foto", url: "/images/pueblos/san-antonio-de-ibarra/2.jpg", alt: "Iglesia de San Antonio de Ibarra" },
       ],
     },
     colorAcento: "#C76139",
@@ -733,12 +734,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Todo el año para artesanías y Cuicocha. Junio para Inti Raymi. Septiembre para Jora Raymi.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/cotacachi/hero.jpg",
       heroColorDominante: "#0D2B3A",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=900&auto=format&fit=crop&q=80", alt: "Lago Cuicocha con islas volcánicas reflejando nubes andinas" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=900&auto=format&fit=crop&q=80", alt: "Artesanías de cuero fino de Cotacachi en mercado local" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&auto=format&fit=crop&q=80", alt: "Reserva ecológica Cotacachi-Cayapas con vegetación exuberante" },
+        { tipo: "foto", url: "/images/pueblos/cotacachi/hero.jpg", alt: "Laguna de Cuicocha en Cotacachi" },
+        { tipo: "foto", url: "/images/pueblos/cotacachi/1.jpg", alt: "Taller de cuero en Cotacachi" },
+        { tipo: "foto", url: "/images/pueblos/cotacachi/2.jpg", alt: "Comunidad rural cerca de Cotacachi" },
       ],
     },
     colorAcento: "#3D8BCD",
@@ -903,12 +904,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Todo el año. Octubre para el Festival de la Uva. Época seca (jun-ago) para mejores vistas al volcán.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1591981870554-a27b30ef8c24?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/patate/hero.jpg",
       heroColorDominante: "#2A1A08",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1591981870554-a27b30ef8c24?w=900&auto=format&fit=crop&q=80", alt: "Paisaje del valle de Patate con volcán Tungurahua al fondo" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&auto=format&fit=crop&q=80", alt: "Viñedos andinos en laderas del Valle de Patate" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=900&auto=format&fit=crop&q=80", alt: "Atardecer sobre montañas andinas con neblina en Patate" },
+        { tipo: "foto", url: "/images/pueblos/patate/hero.jpg", alt: "Volcan Tungurahua visto desde Patate" },
+        { tipo: "foto", url: "/images/pueblos/patate/1.jpg", alt: "Parque Simon Bolivar en Patate" },
+        { tipo: "foto", url: "/images/pueblos/patate/2.jpg", alt: "Valle de Patate desde las laderas" },
       ],
     },
     colorAcento: "#E8B040",
@@ -1084,12 +1085,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Junio a septiembre para el Chimborazo (menor precipitación). Todo el año para artesanías. Noviembre para el Festival de la Alfombra.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1625513028624-b680ed28a80d?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/guano/hero.jpg",
       heroColorDominante: "#1A1A2A",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1625513028624-b680ed28a80d?w=900&auto=format&fit=crop&q=80", alt: "Nevado Chimborazo sobre los valles de Guano" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1515378791036-0648a814c963?w=900&auto=format&fit=crop&q=80", alt: "Mercado artesanal de alfombras de Guano" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1535463731090-e34f4b5098c5?w=900&auto=format&fit=crop&q=80", alt: "Paisaje andino de la provincia de Chimborazo cerca de Guano" },
+        { tipo: "foto", url: "/images/pueblos/guano/hero.jpg", alt: "Redondel de la Tejedora en Guano" },
+        { tipo: "foto", url: "/images/pueblos/guano/1.jpg", alt: "Artesanias en el Parque Central de Guano" },
+        { tipo: "foto", url: "/images/pueblos/guano/2.jpg", alt: "Gobierno Municipal de Guano" },
       ],
     },
     colorAcento: "#E8B040",
@@ -1273,12 +1274,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Todo el año para la Nariz del Diablo. Junio para festividades de San Pedro. Verificar disponibilidad del tren con Ferrocarriles del Ecuador antes de viajar.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1535463731090-e34f4b5098c5?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/alausi/hero.jpg",
       heroColorDominante: "#1A0A05",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1535463731090-e34f4b5098c5?w=900&auto=format&fit=crop&q=80", alt: "Tren histórico ecuatoriano en la ruta de la Nariz del Diablo" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=900&auto=format&fit=crop&q=80", alt: "Cañón andino con neblina en los Andes centrales del Ecuador" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=900&auto=format&fit=crop&q=80", alt: "Centro histórico de Alausí con iglesia colonial al atardecer" },
+        { tipo: "foto", url: "/images/pueblos/alausi/hero.jpg", alt: "Tren de la Nariz del Diablo entre montanas de Alausi" },
+        { tipo: "foto", url: "/images/pueblos/alausi/1.jpg", alt: "Panoramica urbana de Alausi" },
+        { tipo: "foto", url: "/images/pueblos/alausi/2.jpg", alt: "Recorrido ferroviario de la Nariz del Diablo" },
       ],
     },
     colorAcento: "#C76139",
@@ -1468,12 +1469,12 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     mejorEpocaVisitar:
       "Junio a septiembre (estación seca de la costa). Agosto para el Festival del Café. Evitar temporada de lluvias (enero-mayo) por la carretera de montaña.",
     multimedia: {
-      heroImage: "https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=1600&auto=format&fit=crop&q=85&crop=focalpoint",
+      heroImage: "/images/pueblos/zaruma/hero.jpg",
       heroColorDominante: "#2A1500",
       imagenes: [
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=900&auto=format&fit=crop&q=80", alt: "Calles empedradas y casas de madera del centro histórico de Zaruma" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=900&auto=format&fit=crop&q=80", alt: "Iglesia patrimonial de Zaruma con campanario colonial" },
-        { tipo: "foto", url: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=900&auto=format&fit=crop&q=80", alt: "Panorámica de Zaruma sobre colinas boscosas de El Oro" },
+        { tipo: "foto", url: "/images/pueblos/zaruma/hero.jpg", alt: "Vista panoramica de Zaruma" },
+        { tipo: "foto", url: "/images/pueblos/zaruma/1.jpg", alt: "Iglesia y plaza de la Independencia de Zaruma" },
+        { tipo: "foto", url: "/images/pueblos/zaruma/2.jpg", alt: "Desfile entre balcones tradicionales de Zaruma" },
       ],
     },
     colorAcento: "#E8B040",
@@ -1496,6 +1497,41 @@ export const pueblosMagicosDB: PueblosMagicosDB = [
     certificadoPor: "Ministerio de Turismo del Ecuador",
   },
 ];
+
+export const pueblosMagicosDB: PueblosMagicosDB = pueblosMagicosBaseDB.map((pueblo) => {
+  const images = getImagesBySlug(pueblo.id);
+
+  if (!images) {
+    return pueblo;
+  }
+
+  return {
+    ...pueblo,
+    multimedia: {
+      ...pueblo.multimedia,
+      heroImage: images.hero.src,
+      heroColorDominante: images.hero.dominantColor,
+      imagenes: [
+        {
+          tipo: "foto" as const,
+          url: images.hero.src,
+          alt: images.hero.alt,
+          credito: images.hero.attribution.author,
+        },
+        ...images.gallery.map((image) => ({
+          tipo: "foto" as const,
+          url: image.src,
+          alt: image.alt,
+          credito: image.attribution.author,
+        })),
+      ],
+    },
+    seo: {
+      ...pueblo.seo,
+      ogImage: images.ogImage ?? images.hero.src,
+    },
+  };
+});
 
 // ─── UTILIDADES DE ACCESO ────────────────────────────────────
 

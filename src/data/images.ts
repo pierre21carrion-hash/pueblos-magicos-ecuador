@@ -1,300 +1,463 @@
 // ============================================================
-// PUEBLOS MÁGICOS DEL ECUADOR — Sistema de Imágenes Final
-// Archivo: src/data/images.ts
+// PUEBLOS MAGICOS DEL ECUADOR - SISTEMA CENTRAL DE IMAGENES
+// ============================================================
 //
-// 32 imágenes totales:
-// - 18 imágenes Unsplash verificadas
-// - 8 imágenes Gemini generadas (local)
-// - 6 imágenes Unsplash adicionales para completar galerías
+// Todas las imagenes son locales y provienen de Wikimedia Commons.
+// Licencias: CC BY / CC BY-SA, validas para uso comercial con atribucion.
+// Cambios aplicados: descarga local, redimensionado para web y encuadre
+// responsivo via CSS object-fit en Next.js.
 // ============================================================
 
 export type ImageAttribution = {
-  author: string
-  authorUrl: string
-  source: "Unsplash" | "Pexels" | "Gemini" | "Generated"
-  license: string
-  commercialUse: boolean
-  originalUrl?: string
-}
+  author: string;
+  source: "Wikimedia Commons";
+  license: string;
+  licenseUrl: string;
+  url: string;
+  originalFile: string;
+  commercialUse: true;
+  changes: string;
+};
+
+export type DestinationImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  dominantColor: string;
+  attribution: ImageAttribution;
+};
 
 export type DestinationImages = {
-  hero: string
-  heroAlt: string
-  gallery: Array<{
-    url: string
-    alt: string
-    width?: number
-    height?: number
-  }>
-  attribution: ImageAttribution[]
-  ogImage?: string
+  hero: DestinationImage;
+  gallery: DestinationImage[];
+  ogImage?: string;
+};
+
+const changes = "Redimensionada para web; encuadre responsivo con CSS object-fit.";
+
+function commonsAttribution(
+  author: string,
+  license: string,
+  licenseUrl: string,
+  url: string,
+  originalFile: string,
+): ImageAttribution {
+  return {
+    author,
+    source: "Wikimedia Commons",
+    license,
+    licenseUrl,
+    url,
+    originalFile,
+    commercialUse: true,
+    changes,
+  };
 }
 
 export const destinationImages: Record<string, DestinationImages> = {
-
-  // ── 1. RUMIÑAHUI / SANGOLQUÍ ─────────────────────────────
   "ruminahui-sangolqui": {
-    hero: "https://images.unsplash.com/photo-1501684691657-cf3012635478?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Volcán Cotopaxi nevado al amanecer sobre el Valle de los Chillos, Sangolquí",
-    ogImage: "https://images.unsplash.com/photo-1501684691657-cf3012635478?w=1200&auto=format&fit=crop&q=80",
+    hero: {
+      src: "/images/pueblos/ruminahui-sangolqui/hero.jpg",
+      alt: "Volcan Ruminahui visto desde el paramo del Cotopaxi, paisaje andino asociado al canton Ruminahui",
+      width: 2000,
+      height: 1337,
+      dominantColor: "#2D4A1E",
+      attribution: commonsAttribution(
+        "Dallas Krentzel",
+        "CC BY 2.0",
+        "https://creativecommons.org/licenses/by/2.0",
+        "https://commons.wikimedia.org/wiki/File:Rumi%C3%B1ahui,_an_old_dormant_volcano_seen_from_the_slopes_of_Cotopaxi_(7429229278).jpg",
+        "Rumiñahui, an old dormant volcano seen from the slopes of Cotopaxi (7429229278).jpg",
+      ),
+    },
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1638709434603-347adbdf7721?w=900&auto=format&fit=crop&q=80",
-        alt: "Cotopaxi sobre pasto seco de páramo ecuatoriano",
+        src: "/images/pueblos/ruminahui-sangolqui/1.jpg",
+        alt: "Rio Pita entre vegetacion andina, corredor natural de Ruminahui y Sangolqui",
+        width: 1400,
+        height: 936,
+        dominantColor: "#3A5828",
+        attribution: commonsAttribution(
+          "Diego Tirira",
+          "CC BY-SA 2.0",
+          "https://creativecommons.org/licenses/by-sa/2.0",
+          "https://commons.wikimedia.org/wiki/File:P_R%C3%ADo_Pita_1004_(20)_(17198495958).jpg",
+          "P Río Pita 1004 (20) (17198495958).jpg",
+        ),
       },
       {
-        url: "https://images.unsplash.com/photo-1606591808963-8fc3c63fa6a2?w=900&auto=format&fit=crop&q=80",
-        alt: "Volcán Cotopaxi blanco y negro bajo cielo azul",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1643302408853-a0171accc39b?w=900&auto=format&fit=crop&q=80",
-        alt: "Caballos pastando con Cotopaxi nevado al fondo",
-      },
-    ],
-    attribution: [
-      {
-        author: "César Viteri",
-        authorUrl: "https://unsplash.com/@srviteri",
-        source: "Unsplash",
-        license: "Unsplash License",
-        commercialUse: true,
-        originalUrl: "https://unsplash.com/photos/zcyiFpt0E_E",
+        src: "/images/pueblos/ruminahui-sangolqui/2.jpg",
+        alt: "Centro de Sangolqui con arquitectura cotidiana del valle de Los Chillos",
+        width: 1400,
+        height: 1050,
+        dominantColor: "#243E18",
+        attribution: commonsAttribution(
+          "Diego Tirira",
+          "CC BY-SA 2.0",
+          "https://creativecommons.org/licenses/by-sa/2.0",
+          "https://commons.wikimedia.org/wiki/File:Centro_de_Sangolqu%C3%AD.jpg",
+          "Centro de Sangolquí.jpg",
+        ),
       },
     ],
   },
 
-  // ── 2. CAYAMBE ───────────────────────────────────────────
-  "cayambe": {
-    hero: "https://images.unsplash.com/photo-1587325840195-f66867235911?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Paisaje de montañas andinas verdes en la región de Cayambe",
-    ogImage: "https://images.unsplash.com/photo-1587325840195-f66867235911?w=1200&auto=format&fit=crop&q=80",
+  cayambe: {
+    hero: {
+      src: "/images/pueblos/cayambe/hero.jpg",
+      alt: "Nevado Cayambe cubierto de hielo sobre roca volcanica en la linea ecuatorial",
+      width: 2000,
+      height: 1333,
+      dominantColor: "#1A2E3A",
+      attribution: commonsAttribution(
+        "Natalia Cartolini",
+        "CC BY-SA 4.0",
+        "https://creativecommons.org/licenses/by-sa/4.0",
+        "https://commons.wikimedia.org/wiki/File:Nevado_Cayambe_Ecuador.jpg",
+        "Nevado Cayambe Ecuador.jpg",
+      ),
+    },
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1546702005-7f8e5aeab4a6?w=900&auto=format&fit=crop&q=80",
-        alt: "Sacos de granos y hierbas medicinales en mercado andino de Otavalo",
+        src: "/images/pueblos/cayambe/1.jpg",
+        alt: "Pueblo Kayambi transportando la Rama de Gallos durante una celebracion comunitaria",
+        width: 1400,
+        height: 1050,
+        dominantColor: "#1E3545",
+        attribution: commonsAttribution(
+          "TupakAmaruIshkay",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Kayambis_transportan_la_Rama_de_Gallos.jpg",
+          "Kayambis transportan la Rama de Gallos.jpg",
+        ),
       },
       {
-        url: "https://images.unsplash.com/photo-1729197083804-a2bbf29ee8d6?w=900&auto=format&fit=crop&q=80",
-        alt: "Mujeres en traje tradicional indígena del norte ecuatoriano",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1576071034086-7e49b8c786d4?w=900&auto=format&fit=crop&q=80",
-        alt: "Volcán nevado en paisaje andino ecuatoriano",
-      },
-    ],
-    attribution: [
-      {
-        author: "Clayton Manche",
-        authorUrl: "https://unsplash.com/@claymanche",
-        source: "Unsplash",
-        license: "Unsplash License",
-        commercialUse: true,
-        originalUrl: "https://unsplash.com/photos/gxKibd6RCYI",
+        src: "/images/pueblos/cayambe/2.jpg",
+        alt: "Bizcochos de Cayambe, oficio gastronomico tradicional del norte andino",
+        width: 787,
+        height: 1400,
+        dominantColor: "#152530",
+        attribution: commonsAttribution(
+          "David C. S.",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Bizcochos_de_Cayambe.jpg",
+          "Bizcochos de Cayambe.jpg",
+        ),
       },
     ],
   },
 
-  // ── 3. SAN ANTONIO DE IBARRA ─────────────────────────────
   "san-antonio-de-ibarra": {
-    hero: "https://images.unsplash.com/photo-1587325978140-6c7217f5c74d?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Pueblo andino al pie del volcán Imbabura en San Antonio de Ibarra",
-    ogImage: "https://images.unsplash.com/photo-1587325978140-6c7217f5c74d?w=1200&auto=format&fit=crop&q=80",
+    hero: {
+      src: "/images/pueblos/san-antonio-de-ibarra/hero.jpg",
+      alt: "Plaza principal de San Antonio de Ibarra con talleres artesanales al fondo",
+      width: 2000,
+      height: 1355,
+      dominantColor: "#3A2010",
+      attribution: commonsAttribution(
+        "Diego Delso",
+        "CC BY-SA 4.0",
+        "https://creativecommons.org/licenses/by-sa/4.0",
+        "https://commons.wikimedia.org/wiki/File:Plaza_de_armas,_San_Antonio_de_Ibarra,_Ecuador,_2015-07-21,_DD_16.JPG",
+        "Plaza de armas, San Antonio de Ibarra, Ecuador, 2015-07-21, DD 16.JPG",
+      ),
+    },
     gallery: [
       {
-        url: "/images/gemini/Gemini_Generated_Image_qea9kaqea9kaqea9.png",
-        alt: "Taller artesanal de tallado en madera en San Antonio de Ibarra",
+        src: "/images/pueblos/san-antonio-de-ibarra/1.jpg",
+        alt: "Esculturas de madera en el parque central de San Antonio de Ibarra",
+        width: 1400,
+        height: 787,
+        dominantColor: "#432515",
+        attribution: commonsAttribution(
+          "David C. S.",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Esculturas_de_San_Antonio_-_Ibarra.jpg",
+          "Esculturas de San Antonio - Ibarra.jpg",
+        ),
       },
       {
-        url: "/images/gemini/Gemini_Generated_Image_sda8yysda8yysda8.png",
-        alt: "Artesano ecuatoriano tallando madera con cincel y martillo",
-      },
-      {
-        url: "/images/gemini/Gemini_Generated_Image_ut8yc1ut8yc1ut8y.png",
-        alt: "Galería de esculturas de madera religiosas en San Antonio de Ibarra",
-      },
-    ],
-    attribution: [
-      {
-        author: "Gemini AI",
-        authorUrl: "https://gemini.google.com",
-        source: "Generated",
-        license: "Generated for Commercial Use",
-        commercialUse: true,
+        src: "/images/pueblos/san-antonio-de-ibarra/2.jpg",
+        alt: "Iglesia de San Antonio de Ibarra, arquitectura patrimonial de Imbabura",
+        width: 1400,
+        height: 997,
+        dominantColor: "#2E1A0C",
+        attribution: commonsAttribution(
+          "Diego Delso",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Iglesia_de_la_Catedral,_San_Antonio_de_Ibarra,_Ecuador,_2015-07-21,_DD_21.JPG",
+          "Iglesia de la Catedral, San Antonio de Ibarra, Ecuador, 2015-07-21, DD 21.JPG",
+        ),
       },
     ],
   },
 
-  // ── 4. COTACACHI ─────────────────────────────────────────
-  "cotacachi": {
-    hero: "https://images.unsplash.com/photo-1748013298733-0ae693a25de9?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Bote flotando en lago andino de Cotacachi",
-    ogImage: "https://images.unsplash.com/photo-1748013298733-0ae693a25de9?w=1200&auto=format&fit=crop&q=80",
+  cotacachi: {
+    hero: {
+      src: "/images/pueblos/cotacachi/hero.jpg",
+      alt: "Laguna de Cuicocha en la Reserva Ecologica Cotacachi-Cayapas",
+      width: 2000,
+      height: 1333,
+      dominantColor: "#0D2B3A",
+      attribution: commonsAttribution(
+        "Bernard Gagnon",
+        "CC BY-SA 3.0",
+        "https://creativecommons.org/licenses/by-sa/3.0",
+        "https://commons.wikimedia.org/wiki/File:Laguna_de_Cuicocha_02.jpg",
+        "Laguna de Cuicocha 02.jpg",
+      ),
+    },
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1580918860823-f0072f5a6719?w=900&auto=format&fit=crop&q=80",
-        alt: "Lagos de cráter volcánico con montañas al fondo",
+        src: "/images/pueblos/cotacachi/1.jpg",
+        alt: "Taller de cuero en Cotacachi, oficio artesanal de la ciudad",
+        width: 1400,
+        height: 1050,
+        dominantColor: "#0F3040",
+        attribution: commonsAttribution(
+          "JOJOtheWhale.bronxtale",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Cotacachi-Cayapasm.Leather_Shop.jpg",
+          "Cotacachi-Cayapasm.Leather Shop.jpg",
+        ),
       },
       {
-        url: "https://images.unsplash.com/photo-1694206078595-460a3ec27772?w=900&auto=format&fit=crop&q=80",
-        alt: "Montaña andina con lago en las faldas",
-      },
-      {
-        url: "/images/gemini/Gemini_Generated_Image_and0znand0znand0.png",
-        alt: "Taller artesanal de cuero en Cotacachi, Ecuador",
-      },
-    ],
-    attribution: [
-      {
-        author: "Cabadiaz",
-        authorUrl: "https://unsplash.com/@cabadiaz",
-        source: "Unsplash",
-        license: "Unsplash License",
-        commercialUse: true,
-        originalUrl: "https://unsplash.com/photos/XpLMco8_XfU",
+        src: "/images/pueblos/cotacachi/2.jpg",
+        alt: "Comunidad rural cerca de Cotacachi entre montanas de Imbabura",
+        width: 1400,
+        height: 933,
+        dominantColor: "#0A2230",
+        attribution: commonsAttribution(
+          "Arabsalam",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Cotacachi_Ecuador_789.JPG",
+          "Cotacachi Ecuador 789.JPG",
+        ),
       },
     ],
   },
 
-  // ── 5. PATATE ────────────────────────────────────────────
-  "patate": {
-    hero: "https://images.unsplash.com/photo-1728052375405-f0117f1d03cd?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Volcán andino con nubes sobre el valle de Patate",
-    ogImage: "https://images.unsplash.com/photo-1728052375405-f0117f1d03cd?w=1200&auto=format&fit=crop&q=80",
+  patate: {
+    hero: {
+      src: "/images/pueblos/patate/hero.jpg",
+      alt: "Volcan Tungurahua visto desde Patate entre nubes del valle interandino",
+      width: 2000,
+      height: 1500,
+      dominantColor: "#2A1A08",
+      attribution: commonsAttribution(
+        "HenrikKarhu",
+        "CC BY 3.0",
+        "https://creativecommons.org/licenses/by/3.0",
+        "https://commons.wikimedia.org/wiki/File:Tungurahua_desde_patate.JPG",
+        "Tungurahua desde patate.JPG",
+      ),
+    },
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1643302406901-7b6a366f69a5?w=900&auto=format&fit=crop&q=80",
-        alt: "Volcán nevado distante sobre páramo ecuatoriano",
+        src: "/images/pueblos/patate/1.jpg",
+        alt: "Parque Simon Bolivar en el centro cantonal de Patate",
+        width: 1400,
+        height: 788,
+        dominantColor: "#30200A",
+        attribution: commonsAttribution(
+          "Jfbeltranr",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Parque_Bol%C3%ADvar_en_Patate.jpg",
+          "Parque Bolívar en Patate.jpg",
+        ),
       },
       {
-        url: "https://images.unsplash.com/photo-1697497315202-1af707416c0b?w=900&auto=format&fit=crop&q=80",
-        alt: "Vista aérea de montaña andina desde avión",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1695167849032-9428bc6bec09?w=900&auto=format&fit=crop&q=80",
-        alt: "Casa rural sobre colina con montaña al fondo",
-      },
-    ],
-    attribution: [
-      {
-        author: "Paul Jacome",
-        authorUrl: "https://unsplash.com/@ankalago",
-        source: "Unsplash",
-        license: "Unsplash License",
-        commercialUse: true,
-        originalUrl: "https://unsplash.com/photos/ZRe4vXIaflY",
+        src: "/images/pueblos/patate/2.jpg",
+        alt: "Valle de Patate visto desde las laderas de Tungurahua",
+        width: 1400,
+        height: 1045,
+        dominantColor: "#221506",
+        attribution: commonsAttribution(
+          "DIOHER_PAVAL",
+          "CC BY 3.0",
+          "https://creativecommons.org/licenses/by/3.0",
+          "https://commons.wikimedia.org/wiki/File:VALLE_DEL_PATATE_-_panoramio.jpg",
+          "VALLE DEL PATATE - panoramio.jpg",
+        ),
       },
     ],
   },
 
-  // ── 6. GUANO ─────────────────────────────────────────────
-  "guano": {
-    hero: "https://images.unsplash.com/photo-1641312961118-eda4b3512f43?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Volcán Chimborazo nevado dominando el horizonte de Guano",
-    ogImage: "https://images.unsplash.com/photo-1641312961118-eda4b3512f43?w=1200&auto=format&fit=crop&q=80",
+  guano: {
+    hero: {
+      src: "/images/pueblos/guano/hero.jpg",
+      alt: "Redondel de la Tejedora en Guano, simbolo del oficio textil artesanal",
+      width: 2000,
+      height: 1125,
+      dominantColor: "#1A1A2A",
+      attribution: commonsAttribution(
+        "David C. S.",
+        "CC BY-SA 3.0",
+        "https://creativecommons.org/licenses/by-sa/3.0",
+        "https://commons.wikimedia.org/wiki/File:Redondel_de_la_Tejedora,_Guano.jpg",
+        "Redondel de la Tejedora, Guano.jpg",
+      ),
+    },
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1541388810897-3964fe779a8f?w=900&auto=format&fit=crop&q=80",
-        alt: "Montaña cubierta de nieve — Chimborazo",
+        src: "/images/pueblos/guano/1.jpg",
+        alt: "Venta de artesanias en el Parque Central de Guano",
+        width: 1400,
+        height: 787,
+        dominantColor: "#1E1E30",
+        attribution: commonsAttribution(
+          "David C. S.",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Artesan%C3%ADas_en_Parque_Central_de_Guano.jpg",
+          "Artesanías en Parque Central de Guano.jpg",
+        ),
       },
       {
-        url: "https://images.unsplash.com/photo-1677857387449-723b91ffd0e3?w=900&auto=format&fit=crop&q=80",
-        alt: "Manada de llamas en páramo con montaña al fondo",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1649286184088-0b99e8afd509?w=900&auto=format&fit=crop&q=80",
-        alt: "Chimborazo con nube sobre paisaje andino",
-      },
-    ],
-    attribution: [
-      {
-        author: "Jorge Orozco",
-        authorUrl: "https://unsplash.com/@jorgeoandres",
-        source: "Unsplash",
-        license: "Unsplash License",
-        commercialUse: true,
-        originalUrl: "https://unsplash.com/photos/1fM_hvPSf0U",
+        src: "/images/pueblos/guano/2.jpg",
+        alt: "Edificio del Gobierno Municipal de Guano en el centro historico",
+        width: 1400,
+        height: 787,
+        dominantColor: "#161622",
+        attribution: commonsAttribution(
+          "David C. S.",
+          "CC BY-SA 3.0",
+          "https://creativecommons.org/licenses/by-sa/3.0",
+          "https://commons.wikimedia.org/wiki/File:GAD_Municipal_de_Guano.jpg",
+          "GAD Municipal de Guano.jpg",
+        ),
       },
     ],
   },
 
-  // ── 7. ALAUSÍ ────────────────────────────────────────────
-  "alausi": {
-    hero: "https://images.unsplash.com/photo-1504038154755-752b537dddd0?w=1600&auto=format&fit=crop&q=85",
-    heroAlt: "Tren histórico en la ruta del Nariz del Diablo descendiendo por las montañas de Alausí",
-    ogImage: "https://images.unsplash.com/photo-1504038154755-752b537dddd0?w=1200&auto=format&fit=crop&q=80",
+  alausi: {
+    hero: {
+      src: "/images/pueblos/alausi/hero.jpg",
+      alt: "Tren de la Nariz del Diablo avanzando entre montanas verdes de Alausi",
+      width: 2000,
+      height: 1324,
+      dominantColor: "#1A0A05",
+      attribution: commonsAttribution(
+        "Emanuel Agustin Lorenzoni Macchi",
+        "CC BY 2.0",
+        "https://creativecommons.org/licenses/by/2.0",
+        "https://commons.wikimedia.org/wiki/File:Alaus%C3%AD_-_Tren_Nariz_del_Diablo.jpg",
+        "Alausí - Tren Nariz del Diablo.jpg",
+      ),
+    },
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1641312961118-eda4b3512f43?w=900&auto=format&fit=crop&q=80",
-        alt: "Volcán Chimborazo nevado — montaña icónica de la región",
+        src: "/images/pueblos/alausi/1.jpg",
+        alt: "Panoramica urbana de Alausi desde la carretera E35",
+        width: 1400,
+        height: 933,
+        dominantColor: "#200E08",
+        attribution: commonsAttribution(
+          "Ymblanter",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Alaus%C3%AD_Panorama_of_the_city_from_E35_at_the_northeast.jpg",
+          "Alausí Panorama of the city from E35 at the northeast.jpg",
+        ),
       },
       {
-        url: "https://images.unsplash.com/photo-1675991016722-72e5d467b1c0?w=900&auto=format&fit=crop&q=80",
-        alt: "Camino en entorno de Chimborazo",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1578580896025-a6ab6881d54f?w=900&auto=format&fit=crop&q=80",
-        alt: "Afloramiento rocoso andino en región de Alausí",
-      },
-    ],
-    attribution: [
-      {
-        author: "Fernando Tapia",
-        authorUrl: "https://unsplash.com/@ezekiel",
-        source: "Unsplash",
-        license: "Unsplash License",
-        commercialUse: true,
-        originalUrl: "https://unsplash.com/photos/qP2bR5Ky3JE",
+        src: "/images/pueblos/alausi/2.jpg",
+        alt: "Recorrido ferroviario de la Nariz del Diablo entre quebradas andinas",
+        width: 1400,
+        height: 1050,
+        dominantColor: "#150A04",
+        attribution: commonsAttribution(
+          "Arabsalam",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Bahnfahrt_auf_dem_Nariz_del_Diablo_Ecuador20.jpg",
+          "Bahnfahrt auf dem Nariz del Diablo Ecuador20.jpg",
+        ),
       },
     ],
   },
 
-  // ── 8. ZARUMA ────────────────────────────────────────────
-  "zaruma": {
-    hero: "/images/gemini/Gemini_Generated_Image_f646bf646bf646bf.png",
-    heroAlt: "Casas coloniales de madera policromada en Zaruma al atardecer",
-    ogImage: "/images/gemini/Gemini_Generated_Image_f646bf646bf646bf.png",
+  zaruma: {
+    hero: {
+      src: "/images/pueblos/zaruma/hero.jpg",
+      alt: "Vista panoramica de Zaruma sobre colinas y techos patrimoniales de El Oro",
+      width: 2000,
+      height: 1505,
+      dominantColor: "#2A1500",
+      attribution: commonsAttribution(
+        "Martin Vasco",
+        "CC BY-SA 4.0",
+        "https://creativecommons.org/licenses/by-sa/4.0",
+        "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Zaruma,_Ecuador.jpg",
+        "Panoramic view of Zaruma, Ecuador.jpg",
+      ),
+    },
     gallery: [
       {
-        url: "/images/gemini/Gemini_Generated_Image_mn4bfmn4bfmn4bfm.png",
-        alt: "Iglesia colonial de Zaruma con campanario blanco",
+        src: "/images/pueblos/zaruma/1.jpg",
+        alt: "Iglesia y plaza de la Independencia de Zaruma durante una celebracion local",
+        width: 1400,
+        height: 940,
+        dominantColor: "#311800",
+        attribution: commonsAttribution(
+          "Danny Arevalo",
+          "CC BY-SA 3.0",
+          "https://creativecommons.org/licenses/by-sa/3.0",
+          "https://commons.wikimedia.org/wiki/File:Castillo,_Iglesia,_Plaza_de_la_Independencia.jpg",
+          "Castillo, Iglesia, Plaza de la Independencia.jpg",
+        ),
       },
       {
-        url: "/images/gemini/Gemini_Generated_Image_n9d63on9d63on9d6.png",
-        alt: "Calle empedrada del centro histórico de Zaruma",
-      },
-      {
-        url: "/images/gemini/Gemini_Generated_Image_p01ibgp01ibgp01i.png",
-        alt: "Vista panorámica aérea de Zaruma sobre colinas boscosas",
-      },
-    ],
-    attribution: [
-      {
-        author: "Gemini AI",
-        authorUrl: "https://gemini.google.com",
-        source: "Generated",
-        license: "Generated for Commercial Use",
-        commercialUse: true,
+        src: "/images/pueblos/zaruma/2.jpg",
+        alt: "Desfile en Zaruma entre balcones y arquitectura tradicional de madera",
+        width: 1400,
+        height: 1050,
+        dominantColor: "#211100",
+        attribution: commonsAttribution(
+          "Arabsalam",
+          "CC BY-SA 4.0",
+          "https://creativecommons.org/licenses/by-sa/4.0",
+          "https://commons.wikimedia.org/wiki/File:Zaruma_Ecuador619.jpg",
+          "Zaruma Ecuador619.jpg",
+        ),
       },
     ],
   },
-}
-
-// ============================================================
-// HELPERS
-// ============================================================
+};
 
 export function getImagesBySlug(slug: string): DestinationImages | null {
-  return destinationImages[slug] ?? null
+  return destinationImages[slug] ?? null;
 }
 
 export function getHeroBySlug(slug: string): string {
-  return destinationImages[slug]?.hero ?? "/images/fallback.jpg"
+  return destinationImages[slug]?.hero.src ?? destinationImages["ruminahui-sangolqui"].hero.src;
 }
 
 export function getHeroAltBySlug(slug: string): string {
-  return destinationImages[slug]?.heroAlt ?? "Imagen de pueblo mágico del Ecuador"
+  return destinationImages[slug]?.hero.alt ?? "Imagen de pueblo magico del Ecuador";
 }
 
 export function getSlugsWithImages(): string[] {
-  return Object.keys(destinationImages)
+  return Object.keys(destinationImages);
+}
+
+export function getImageCredit(image: DestinationImage): string {
+  return `${image.attribution.author} · ${image.attribution.source} · ${image.attribution.license}`;
+}
+
+export function getImageCreditsBySlug(slug: string): string[] {
+  const images = getImagesBySlug(slug);
+  if (!images) return [];
+
+  return Array.from(
+    new Set([images.hero, ...images.gallery].map((image) => getImageCredit(image))),
+  );
 }

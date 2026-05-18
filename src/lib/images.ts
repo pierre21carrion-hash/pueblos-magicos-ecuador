@@ -58,8 +58,8 @@ export const IMAGE_SIZES = {
   /** Full viewport hero — used in page heroes and landing */
   hero: "100vw",
 
-  /** 4-column grid (default card layout) */
-  card: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw",
+  /** 3-column grid (default card layout: 1col → 2col → 3col) */
+  card: "(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw",
 
   /** 3-column grid */
   cardLg: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",

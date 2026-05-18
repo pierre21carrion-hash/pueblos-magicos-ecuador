@@ -205,13 +205,15 @@ export default function HomePage() {
               const count = stats.porRegion[world.region] ?? 0;
               return (
                 <article key={world.region} className="group relative min-h-[28rem] overflow-hidden rounded-lg border border-white/8 bg-carbon-light">
-                  <HeroImage
-                    slug={world.slug}
-                    overlay="premium"
-                    objectPosition="center 45%"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                    className="absolute inset-0 h-full min-h-[28rem] transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
+                  <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.03]">
+                    <HeroImage
+                      slug={world.slug}
+                      overlay="premium"
+                      objectPosition="center 45%"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                      className="w-full h-full"
+                    />
+                  </div>
                   <div className="relative z-10 flex min-h-[28rem] flex-col justify-end p-5">
                     <p className="text-xs uppercase tracking-[0.22em] text-oro mb-3">
                       {world.region} · {count} documentado{count === 1 ? "" : "s"}
